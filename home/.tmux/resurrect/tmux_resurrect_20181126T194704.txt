@@ -1,0 +1,13 @@
+pane	0	0	:vim	0	:-	0	:/home/shenjing/Dropbox/Programming/Python/py_project/ML_JHH/HW5	1	vim	:vim HW5.py
+pane	0	1	:zsh	1	:*	0	:/home/shenjing/Dropbox/Programming/Python/py_project/ML_JHH/HW5	1	zsh	:
+pane	0	2	:localhost	0	:	0	:/home/shenjing/Dropbox/Programming/Working-Environment/Dockerfiles/Fedora	1	python3	:python3
+pane	0	3	:vim	0	:	0	:/home/shenjing/Dropbox/Programming/Working-Environment/Dockerfiles/Fedora	1	vim	:vim Dockerfile
+pane	0	4	:Fedora	0	:	0	:/home/shenjing/Downloads/pycharm-2018.2.5/bin	1	ssh	:ssh karta@140.113.207.5
+pane	0	5	:Ubuntu docker	0	:#	0	:/home/shenjing/Dropbox/Programming/Python/py_project/ML_JHH	1	man	:man cp
+window	0	0	0	:-	c07e,146x35,0,0,1
+window	0	1	1	:*	ad5f,211x50,0,0,2
+window	0	2	0	:	ad60,211x50,0,0,3
+window	0	3	0	:	ad61,211x50,0,0,4
+window	0	4	0	:	ad62,211x50,0,0,5
+window	0	5	0	:#	ad63,211x50,0,0,6
+state	0	
