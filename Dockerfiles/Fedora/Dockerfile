@@ -23,6 +23,8 @@ RUN dnf install -y \
         wget \
         rsync \
         net-tools \
+        nmap \
+        patch \
         iputils \
         openssh-server
 
@@ -42,7 +44,9 @@ RUN dnf install -y \
         cgdb \
         golang \
         python \
-        python37
+        python37 \
+        python3-pip \
+        python3-devel
 
 # [install - optional] Google Drive cli
 RUN dnf copr enable -y vaughan/drive-google && \
@@ -68,11 +72,15 @@ RUN mkdir -p /var/run/sshd && \
 ADD id_rsa.pub /home/${CUST_USER}/.ssh/authorized_keys
 
 # Set the user name to use when running the image
-# => because run_ssh.sh need root permission, so default user must be root
+# => because sshd need root permission, so default user must be root
 # USER ${CUST_USER}
 
 # Set the working directory for following instructions
 WORKDIR /home/${CUST_USER}
+
+# [install] other tools (need pip3, git clone)
+ADD install_others.sh /install_others.sh
+RUN chmod 755 /install_others.sh && /install_others.sh
 
 # Provide defaults for an executing container
 CMD ["/usr/sbin/sshd", "-D"]
