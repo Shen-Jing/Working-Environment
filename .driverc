@@ -1,0 +1,13 @@
+# My global .driverc file
+
+# For lists
+[list]
+long=true
+
+# For pushes
+[push]
+hidden=true
+
+# For pulls
+[pull]
+hidden=true
