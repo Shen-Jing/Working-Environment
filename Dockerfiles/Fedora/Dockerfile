@@ -23,6 +23,7 @@ RUN dnf install -y \
         wget \
         rsync \
         net-tools \
+        procps-ng \
         nmap \
         patch \
         iputils \
@@ -40,13 +41,18 @@ RUN dnf install -y \
         git \
         gcc \
         gcc-c++ \
+        clang \
+        clang++ \
         gdb \
         cgdb \
         golang \
         python \
+        python-devel \
         python37 \
         python3-pip \
         python3-devel
+
+RUN pip3 install ipython
 
 # [install - optional] Google Drive cli
 RUN dnf copr enable -y vaughan/drive-google && \
