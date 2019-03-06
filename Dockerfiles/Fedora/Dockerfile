@@ -27,7 +27,8 @@ RUN dnf install -y \
         nmap \
         patch \
         iputils \
-        openssh-server
+        openssh-server \
+        bzip2
 
 # [install] about network security
 RUN dnf install -y \
@@ -41,8 +42,8 @@ RUN dnf install -y \
         git \
         gcc \
         gcc-c++ \
+	      cppcheck \
         clang \
-        clang++ \
         gdb \
         cgdb \
         golang \
@@ -50,9 +51,8 @@ RUN dnf install -y \
         python-devel \
         python37 \
         python3-pip \
-        python3-devel
-
-RUN pip3 install ipython
+        python3-devel \
+	      pylint
 
 # [install - optional] Google Drive cli
 RUN dnf copr enable -y vaughan/drive-google && \

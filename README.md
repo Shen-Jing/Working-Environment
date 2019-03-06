@@ -8,9 +8,10 @@ such as Linux Shell scripts,
     - util-linux-user: `chsh`
     - net-tools: `netstat`
     - iputils: `ping`
+        - iputils-ping (ubuntu)
     - procps-ng: `free`, `pidof`
     - patch: (for radare2 on Fedora)
-
+    - bzip2: solve `bzip2: Cannot exec: No such file or directory`
 2. Programming Language
     - python: python2 (for some zsh plugins such as `autojump`)
     - golang: Go (for GDrive)
@@ -23,3 +24,4 @@ such as Linux Shell scripts,
 1. python module
     - numpy
     - matplot
+    - ipython: more interactively python CLI
