@@ -28,12 +28,6 @@ git clone https://github.com/scwuaptx/peda.git ${CUST_HOME}/peda
 echo "source ${CUST_HOME}/peda/peda.py" >> ${CUST_HOME}/.gdbinit
 cp ${CUST_HOME}/peda/.inputrc ${CUST_HOME}/
 
-## radare 2
-#git clone https://github.com/radare/radare2.git
-#cd radare2
-## root cannot use install.sh to install, so we change to normal user
-#su ${CUST_USER}
-#sys/install.sh
 
 # [Develope]
 # Boost
@@ -54,3 +48,8 @@ make
 make install
 # /usr/local/include/gtest
 rm -rf ../googletest
+
+# [Trivial]
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# And I should run `tmux source ~/.tmux.conf` in tmux
+# <prefix> + I to install plugin 
