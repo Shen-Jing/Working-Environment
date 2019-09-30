@@ -1,0 +1,23 @@
+FROM centos:6.10
+RUN yum update -y && \
+    yum install -y ypbind yp-tools authconfig-gtk* \
+    vim ed \
+    openssh openssh-server openssh-clients \
+    iputils \
+
+mkdir /usr/share/lsf_distrib
+
+# 解除註解
+PermitRootLogin yes
+
+passwd qsefthuk90@nctu_jhhlab
+
+
+
+# change hostname
+HOSTNAME=localhost.localdomain
+HOSTNAME=es7f4_lsf
+/etc/sysconfig/network
+NETWORK=es7f4_lsf
+
+

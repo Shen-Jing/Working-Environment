@@ -1,0 +1,38 @@
+FROM ubuntu:18.04
+
+# update apt-get packages
+RUN apt-get update -y
+
+RUN yes | unminimize
+
+# [install] Linux utilities
+RUN apt install -y \
+        vim \
+        zsh \
+        autojump \
+        tmux \
+        htop \
+        net-tools \
+        curl \
+        patch \
+        openssh-server \
+        nis
+
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
+    sh get-docker.sh
+
+# [system setting] set timezone
+# and add user to sudoers
+RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && \
+    echo "%sudogrp  ALL=(ALL)   ALL" >> /etc/sudoers && \
+    echo "lsfadmin  ALL=(ALL)   ALL" >> /etc/sudoers
+
+# [ssh setting] ssh daemon
+# and nis setting
+RUN mkdir -p /var/run/sshd && \
+    ssh-keygen -A && \
+    sed -ie 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
+    echo "ypserver 140.113.207.104" >> /etc/yp.conf
+
+# Provide defaults for an executing container
+CMD ["/usr/sbin/sshd", "-D"]
