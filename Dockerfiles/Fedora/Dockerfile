@@ -1,4 +1,4 @@
-FROM fedora:28
+FROM fedora:30
 
 # Comment out the tsflags, for (dnf) installing packages with documents
 # and set to auto select fastested repo mirror
@@ -28,7 +28,10 @@ RUN dnf install -y \
         patch \
         iputils \
         openssh-server \
-        bzip2
+        bzip2 \
+        myrepos vcsh \
+        ripgrep \
+        fzf
 
 # [install] about network security
 RUN dnf install -y \
@@ -42,7 +45,7 @@ RUN dnf install -y \
         git \
         gcc \
         gcc-c++ \
-	      cppcheck \
+	    cppcheck \
         clang \
         gdb \
         cgdb \
@@ -52,7 +55,7 @@ RUN dnf install -y \
         python37 \
         python3-pip \
         python3-devel \
-	      pylint
+	    pylint
 
 # [install - optional] Google Drive cli
 RUN dnf copr enable -y vaughan/drive-google && \
@@ -65,7 +68,7 @@ ENV CUST_USER shenjing
 # [system setting] Add user and set account passwd (user_name:passwd)
 # and set timezone
 # and add user to sudoers
-RUN adduser ${CUST_USER} --create-home --shell /usr/bin/zsh && \
+RUN adduser ${CUST_USER} --create-home --shell /usr/bin/zsh --uid 1209 && \
     echo "root:bb8590" | chpasswd && \
     echo "${CUST_USER}:8590" | chpasswd && \
     ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && \
@@ -75,7 +78,7 @@ RUN adduser ${CUST_USER} --create-home --shell /usr/bin/zsh && \
 RUN mkdir -p /var/run/sshd && \
     ssh-keygen -A && \
     mkdir /home/${CUST_USER}/.ssh
-ADD id_rsa.pub /home/${CUST_USER}/.ssh/authorized_keys
+ADD authorized_keys /home/${CUST_USER}/.ssh/authorized_keys
 
 # Set the user name to use when running the image
 # => because sshd need root permission, so default user must be root
@@ -89,4 +92,6 @@ ADD install_others.sh /install_others.sh
 RUN chmod 755 /install_others.sh && /install_others.sh
 
 # Provide defaults for an executing container
-CMD ["/usr/sbin/sshd", "-D"]
+ADD start.sh /
+RUN chmod 755 /start.sh
+CMD ["/start.sh"]

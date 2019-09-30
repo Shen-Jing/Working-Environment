@@ -3,21 +3,30 @@ CUST_USER="shenjing"
 CUST_HOME="/home/${CUST_USER}"
 cd ${CUST_HOME}
 
-# [Others]
-pip3 install ipython
+# [Other]
+# Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh && rm get-docker.sh
+# And modify permission (lab's docker gid: 4001)
+groupmod -g 4001 docker && usermod -aG docker ${CUST_USER}
+
+# [Shell]
+
+# [Python]
+pip install ipython
+pip3 install ipython jupyter pandas
 # pip3 install numpy
 python3 -m pip install numpy
 
-# [Linter]
-pip3 install flake8
-pip3 install mypy
+# Linter
+pip3 install flake8 mypy
 
 # [Network Security]
 # python3-pwntools
 pip3 install --upgrade git+https://github.com/arthaud/python3-pwntools.git
 
 # Crypto
-pip3 install pycryptodome
+#pip3 install pycryptodome
 
 # gdb-pwn
 git clone https://github.com/scwuaptx/Pwngdb.git ${CUST_HOME}/Pwngdb
@@ -28,28 +37,26 @@ git clone https://github.com/scwuaptx/peda.git ${CUST_HOME}/peda
 echo "source ${CUST_HOME}/peda/peda.py" >> ${CUST_HOME}/.gdbinit
 cp ${CUST_HOME}/peda/.inputrc ${CUST_HOME}/
 
-
 # [Develope]
 # Boost
 PATH_TO_BOOST="/usr/local"
-BOOST_DIR="boost_1_69_0"
-wget https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.bz2
-tar -jxf boost_1_69_0.tar.bz2 -C ${PATH_TO_BOOST}
-${PATH_TO_BOOST}/${BOOST_DIR}/bootstrap.sh
-${PATH_TO_BOOST}/${BOOST_DIR}/b2 install
-rm -f boost_1_69_0.tar.bz2
+BOOST_DIR="boost_1_71_0"
+cd ${PATH_TO_BOOST}
+wget -P ${PATH_TO_BOOST} https://dl.bintray.com/boostorg/release/1.71.0/source/${BOOST_DIR}.tar.bz2
+tar -jxf ${BOOST_DIR}.tar.bz2 -C ${PATH_TO_BOOST}
+cd ${PATH_TO_BOOST}/${BOOST_DIR}
+./bootstrap.sh
+./b2 install
+rm -f ${PATH_TO_BOOST}/${BOOST_DIR}.tar.bz2
 
 # Google Test
-git clone https://github.com/google/googletest.git
-cd ./googletest
+git clone https://github.com/google/googletest.git ~/googletest
+cd ~/googletest
 # gtest (O) gmock (X)
 cmake . -DBUILD_GMOCK=OFF -DBUILD_GTEST=ON
 make
 make install
 # /usr/local/include/gtest
-rm -rf ../googletest
+rm -rf ~/googletest
 
 # [Trivial]
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-# And I should run `tmux source ~/.tmux.conf` in tmux
-# <prefix> + I to install plugin 
