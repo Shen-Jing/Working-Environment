@@ -5,7 +5,7 @@ such as Linux Shell scripts,
 
 ## Dockerfile
 ```bash
-docker run -d --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/nfs_home/kevin:/home/shenjing kevin_fedora:30v1.7
+docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/docker.sock:/var/run/docker.sock -v /home/nfs_home/kevin:/home/kevin -v /mnt/project_warehouse3/godzilla/kevin:/mnt/godzilla/kevin kevin_fedora:30v1.7
 ```
 1. linux package
     - util-linux-user: `chsh`
