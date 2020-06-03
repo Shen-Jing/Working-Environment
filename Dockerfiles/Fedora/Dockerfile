@@ -1,4 +1,4 @@
-FROM fedora:30
+FROM fedora:27
 
 # Comment out the tsflags, for (dnf) installing packages with documents
 # and set to auto select fastested repo mirror
@@ -9,57 +9,47 @@ RUN sed -ie '/tsflags=nodocs/s/^/# /g' /etc/dnf/dnf.conf && \
 
 # [install] Linux utilities
 RUN dnf install -y \
-        man \
-        man-pages \
-        sudo \
-        util-linux-user \
-        vim \
-        zsh \
-        autojump-zsh \
-        tmux \
-        less \
-        htop \
-        lsof \
-        wget \
-        rsync \
-        net-tools \
-        procps-ng \
-        nmap \
-        patch \
-        iputils \
-        openssh-server \
-        bzip2 \
-        myrepos vcsh \
-        ripgrep \
-        fzf
+    man man-pages \
+    sudo \
+    util-linux-user \
+    vim tmux zsh autojump-zsh \
+    less \
+    htop glances\
+    lsof \
+    wget \
+    rsync \
+    net-tools iputils \
+    procps-ng \
+    nmap \
+    patch \
+    openssh-server \
+    bzip2 \
+    myrepos vcsh \
+    ripgrep \
+    fzf
 
 # [install] about network security
 RUN dnf install -y \
-        strace \
-        ltrace
+    strace \
+    ltrace
 
 # [install] about developer
 RUN dnf install -y \
-        make \
-        cmake \
-        git \
-        gcc \
-        gcc-c++ \
-	    cppcheck \
-        clang \
-        gdb \
-        cgdb \
-        golang \
-        python \
-        python-devel \
-        python37 \
-        python3-pip \
-        python3-devel \
-	    pylint
+    make cmake \
+    git \
+    gcc gcc-c++ clang gdb\
+    cppcheck \
+    golang \
+    python \
+    python-devel \
+    python37 \
+    python3-pip \
+    python3-devel \
+    pylint
 
 # [install - optional] Google Drive cli
-RUN dnf copr enable -y vaughan/drive-google && \
-    dnf install -y drive-google
+# vaughan/drive-google doesn't support older version of Fedora (< 31)
+# TODO: https://github.com/odeke-em/drive#from-sources
 
 # After install all tools, update man db and clean dnf cache
 RUN mandb && dnf clean all && rm -rf /var/cache/dnf
@@ -79,6 +69,7 @@ RUN mkdir -p /var/run/sshd && \
     ssh-keygen -A && \
     mkdir /home/${CUST_USER}/.ssh
 ADD authorized_keys /home/${CUST_USER}/.ssh/authorized_keys
+RUN chown -R ${CUST_USER}:${CUST_USER} /home/${CUST_USER}/.ssh
 
 # Set the user name to use when running the image
 # => because sshd need root permission, so default user must be root
@@ -88,6 +79,8 @@ ADD authorized_keys /home/${CUST_USER}/.ssh/authorized_keys
 WORKDIR /home/${CUST_USER}
 
 # [install] other tools (need pip3, git clone)
+ADD install_docker.sh /install_docker.sh
+RUN chmod 755 /install_docker.sh && /install_docker.sh
 ADD install_others.sh /install_others.sh
 RUN chmod 755 /install_others.sh && /install_others.sh
 

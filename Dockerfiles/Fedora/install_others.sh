@@ -4,11 +4,6 @@ CUST_HOME="/home/${CUST_USER}"
 cd ${CUST_HOME}
 
 # [Other]
-# Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh && rm get-docker.sh
-# And modify permission (lab's docker gid: 4001)
-groupmod -g 4001 docker && usermod -aG docker ${CUST_USER}
 
 # [Shell]
 
@@ -28,21 +23,18 @@ pip3 install --upgrade git+https://github.com/arthaud/python3-pwntools.git
 # Crypto
 #pip3 install pycryptodome
 
+# **deprecated**: gdb-pwn & gdb-peda would affect vscode debugger 
 # gdb-pwn
-git clone https://github.com/scwuaptx/Pwngdb.git ${CUST_HOME}/Pwngdb
-cp ${CUST_HOME}/Pwngdb/.gdbinit ${CUST_HOME}/
 
 # gdb-peda
-git clone https://github.com/scwuaptx/peda.git ${CUST_HOME}/peda
-echo "source ${CUST_HOME}/peda/peda.py" >> ${CUST_HOME}/.gdbinit
-cp ${CUST_HOME}/peda/.inputrc ${CUST_HOME}/
 
 # [Develope]
 # Boost
 PATH_TO_BOOST="/usr/local"
-BOOST_DIR="boost_1_71_0"
+BOOST_DIR="boost_1_73_0"
 cd ${PATH_TO_BOOST}
-wget -P ${PATH_TO_BOOST} https://dl.bintray.com/boostorg/release/1.71.0/source/${BOOST_DIR}.tar.bz2
+#wget -P ${PATH_TO_BOOST} https://dl.bintray.com/boostorg/release/1.73.0/source/${BOOST_DIR}.tar.bz2
+curl -L -o ${PATH_TO_BOOST}/${BOOST_DIR}.tar.bz2 https://dl.bintray.com/boostorg/release/1.73.0/source/${BOOST_DIR}.tar.bz2
 tar -jxf ${BOOST_DIR}.tar.bz2 -C ${PATH_TO_BOOST}
 cd ${PATH_TO_BOOST}/${BOOST_DIR}
 ./bootstrap.sh
