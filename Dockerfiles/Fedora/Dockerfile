@@ -1,4 +1,4 @@
-FROM fedora:27
+FROM fedora:32
 
 # Comment out the tsflags, for (dnf) installing packages with documents
 # and set to auto select fastested repo mirror
@@ -11,11 +11,12 @@ RUN sed -ie '/tsflags=nodocs/s/^/# /g' /etc/dnf/dnf.conf && \
 RUN dnf install -y \
     man man-pages \
     sudo \
-    util-linux-user \
+    util-linux-user hostname \
     vim tmux zsh autojump-zsh \
     less \
     htop glances\
     lsof \
+    mlocate \
     wget \
     rsync \
     net-tools iputils \
@@ -35,21 +36,25 @@ RUN dnf install -y \
 
 # [install] about developer
 RUN dnf install -y \
-    make cmake \
+    make cmake autoconf\
     git \
     gcc gcc-c++ clang gdb\
     cppcheck \
+    java \
     golang \
     python \
     python-devel \
     python37 \
     python3-pip \
     python3-devel \
-    pylint
+    pylint \
+    zlib-devel
 
 # [install - optional] Google Drive cli
 # vaughan/drive-google doesn't support older version of Fedora (< 31)
-# TODO: https://github.com/odeke-em/drive#from-sources
+# - [ ] TODO: https://github.com/odeke-em/drive#from-sources
+# odeke-em/drive → rclone/rclone
+RUN curl https://rclone.org/install.sh | bash
 
 # After install all tools, update man db and clean dnf cache
 RUN mandb && dnf clean all && rm -rf /var/cache/dnf
@@ -79,10 +84,15 @@ RUN chown -R ${CUST_USER}:${CUST_USER} /home/${CUST_USER}/.ssh
 WORKDIR /home/${CUST_USER}
 
 # [install] other tools (need pip3, git clone)
-ADD install_docker.sh /install_docker.sh
-RUN chmod 755 /install_docker.sh && /install_docker.sh
-ADD install_others.sh /install_others.sh
-RUN chmod 755 /install_others.sh && /install_others.sh
+# Error: Fedora 32 repo doesn't support docker
+#ADD install_docker.sh /install_docker.sh
+#RUN chmod 755 /install_docker.sh && /install_docker.sh
+ADD install_c-c++.sh /install_c-c++.sh
+RUN chmod 755 /install_c-c++.sh && /install_c-c++.sh
+ADD install_python.sh /install_python.sh
+RUN chmod 755 /install_python.sh && /install_python.sh
+#ADD install_others.sh /install_others.sh
+#RUN chmod 755 /install_others.sh && /install_others.sh
 
 # Provide defaults for an executing container
 ADD start.sh /

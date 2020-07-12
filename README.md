@@ -21,7 +21,7 @@ It doesn't compatible with my project (GTEST failed).
 #### gcc default version (Fedora)
 
 - 30: 9.3.1
-- 28: 8.3.1
+- 29: 8.3.1
 - 28: 7.3.0
 
 ```bash
@@ -66,6 +66,7 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
 - clang: for ale linter (include clang++)
 - cppcheck: static analysis tool for C/C++ code
 - pylint
+- java: Canu
 
 ## install_others (.sh)
 
@@ -79,10 +80,10 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
 
 ### 不同 host build image 的下載速度差異大
 
-boost.tar 足足有 100 MB 左右，雖然對交大學術網路而言，下載只是幾秒鐘的事情。
-然而不同實體機竟然會有截然不同的下載速度。
+boost.tar 足足有 100 MB 左右，雖然對交大學術網路而言，下載只是幾秒鐘的事情，然而不同實體機竟然會有截然不同的下載速度。
 
-因此可在 Fedora 的 Dockerfile 中看到原本使用 `wget -P` 下載，後來又改為 `curl -L -o`（順帶一提，`-L` 重導向實在好重要，避免下載到空檔案），結果出在網路問題。
+因此可在 Fedora 的 Dockerfile 中看到原本使用 `wget -P` 下載，後來又改為 `curl -L -o`，是因為一開始以為 `wget` 壞掉了……，結果出在網路問題。
+順帶一提，`curl` 的 `-L` 重導向實在好重要，可以避免下載到空檔案
 
 目前還不知道該怎麼解決，治標解法：
 
