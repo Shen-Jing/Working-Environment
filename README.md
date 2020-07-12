@@ -7,19 +7,20 @@
 ## Dockerfile
 
 ```bash
-docker build -t jhhlab/kevin_fedora:27v1.8 . --no-cache
+docker build -t jhhlab/kevin_fedora:32v2.0 . --no-cache
 # If failed at some stage
-docker build -t jhhlab/kevin_fedora:27v1.8 .
-docker push jhhlab/kevin_fedora:27v1.8
+docker build -t jhhlab/kevin_fedora:
+docker push jhhlab/kevin_fedora:32v2.0
 ```
 
 ### Fedora
 
 I don't know how to install `gcc` < 8.0.0. :cry:
-It doesn't compatible with my project (GTEST failed).
+It doesn't compatible with my project (Biovoltron GTEST failed).
 
 #### gcc default version (Fedora)
 
+- 32: 10.1.1 (`-std=c++20`)
 - 30: 9.3.1
 - 29: 8.3.1
 - 28: 7.3.0
@@ -68,13 +69,21 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
 - pylint
 - java: Canu
 
-## install_others (.sh)
-
 ### python module
 
 - numpy
 - matplot
 - ipython: more interactively python CLI
+
+## Custom scripts
+
+### install_others (.sh)
+
+### install_c-c++ (.sh)
+
+- build older version of gcc (8.4.0) for supporting Biovoltron
+- boost
+- GTest
 
 ## known issues
 
