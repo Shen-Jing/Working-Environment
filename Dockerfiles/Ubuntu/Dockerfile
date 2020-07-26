@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 # [install] Linux utilities
 RUN apt upate -y && 
@@ -7,7 +7,7 @@ RUN apt upate -y &&
     sudo \
     zsh \
     vim tmux \
-    autojump-zsh \
+    autojump \
     less \
     htop glances\
     lsof \
@@ -24,18 +24,17 @@ RUN apt upate -y &&
     fzf
 
 # [install] about developer
-RUN dnf install -y \
+RUN apt install -y \
         make cmake \
         git \
-        gcc gcc-c++ clang gdb\
-	    cppcheck \
+        gcc g++ g++-10
+        clang gdb \
+        cppcheck \
         golang \
         python \
-        python-devel \
-        python37 \
+        python3.8 \
         python3-pip \
-        python3-devel \
-	    pylint
+        pylint
 
 # [install - optional] Google Drive cli
 
