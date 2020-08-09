@@ -50,6 +50,8 @@ RUN dnf install -y \
     pylint \
     zlib-devel
 
+RUN dnf debuginfo-install -y glibc libgcc libstdc++
+
 # [install - optional] Google Drive cli
 # vaughan/drive-google doesn't support older version of Fedora (< 31)
 # - [ ] TODO: https://github.com/odeke-em/drive#from-sources
