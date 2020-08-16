@@ -7,16 +7,16 @@
 ## Dockerfile
 
 ```bash
-docker build -t jhhlab/kevin_fedora:32v2.0 . --no-cache
+VER="32v2.1"
+docker build -t jhhlab/kevin_fedora:${VER} . --no-cache
 # If failed at some stage
-docker build -t jhhlab/kevin_fedora:
-docker push jhhlab/kevin_fedora:32v2.0
+docker build -t jhhlab/kevin_fedora:${VER}
+docker push jhhlab/kevin_fedora:${VER}
 ```
 
 ### Fedora
 
-I don't know how to install `gcc` < 8.0.0. :cry:
-It doesn't compatible with my project (Biovoltron GTEST failed).
+`gcc`  doesn't compatible with my project (Biovoltron GTEST failed).
 
 #### gcc default version (Fedora)
 
@@ -26,15 +26,15 @@ It doesn't compatible with my project (Biovoltron GTEST failed).
 - 28: 7.3.0
 
 ```bash
-docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/docker.sock:/var/run/docker.sock -v /home/nfs_home/kevin:/home/kevin -v /mnt/project_warehouse3/godzilla/kevin:/mnt/godzilla/kevin kevin_fedora:30v1.7
+docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/docker.sock:/var/run/docker.sock -v /home/nfs_home/kevin:/home/kevin -v /mnt/project_warehouse3/godzilla/kevin:/mnt/godzilla/kevin /mnt/project_warehouse1/mammoth/kevin:/mnt/mammoth/kevin kevin_fedora:${VER}
 ```
 
 ### Ubuntu
 
-for support older gcc version (< 8.0.0)
-
 #### gcc default version (Ubuntu)
 
+- 20.04: 9.3.0
+  - `gcc-10`: 10.0.1 20200411 (experimental)
 - 18.04: 7.5.0
 
 ```bash
@@ -81,9 +81,12 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
 
 ### install_c-c++ (.sh)
 
-- build older version of gcc (8.4.0) for supporting Biovoltron
 - boost
 - GTest
+
+### install_gcc8 (.sh)
+
+- build older version of gcc (8.4.0) for supporting Biovoltron
 
 ## known issues
 
@@ -92,7 +95,7 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
 boost.tar 足足有 100 MB 左右，雖然對交大學術網路而言，下載只是幾秒鐘的事情，然而不同實體機竟然會有截然不同的下載速度。
 
 因此可在 Fedora 的 Dockerfile 中看到原本使用 `wget -P` 下載，後來又改為 `curl -L -o`，是因為一開始以為 `wget` 壞掉了……，結果出在網路問題。
-順帶一提，`curl` 的 `-L` 重導向實在好重要，可以避免下載到空檔案
+順帶一提，`curl` 的 `-L` 重導向實在好重要，可以避免下載到空檔案。
 
 目前還不知道該怎麼解決，治標解法：
 
