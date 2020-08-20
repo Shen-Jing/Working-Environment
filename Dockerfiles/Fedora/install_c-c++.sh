@@ -8,10 +8,11 @@
 # [Develope]
 # Boost
 PATH_TO_BOOST="/usr/local"
+BOOST_VER="1.74.0"
 BOOST_DIR="boost_1_74_0"
 cd ${PATH_TO_BOOST}
-#wget -P ${PATH_TO_BOOST} https://dl.bintray.com/boostorg/release/1.73.0/source/${BOOST_DIR}.tar.bz2
-curl -L -o ${PATH_TO_BOOST}/${BOOST_DIR}.tar.bz2 https://dl.bintray.com/boostorg/release/1.73.0/source/${BOOST_DIR}.tar.bz2
+#wget -P ${PATH_TO_BOOST} https://dl.bintray.com/boostorg/release/${BOOST_VER}/source/${BOOST_DIR}.tar.bz2
+curl -L -o ${PATH_TO_BOOST}/${BOOST_DIR}.tar.bz2 https://dl.bintray.com/boostorg/release/${BOOST_VER}/source/${BOOST_DIR}.tar.bz2
 tar -jxf ${BOOST_DIR}.tar.bz2 -C ${PATH_TO_BOOST}
 cd ${PATH_TO_BOOST}/${BOOST_DIR}
 ./bootstrap.sh
