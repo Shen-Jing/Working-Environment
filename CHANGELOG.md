@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [2.1.1] - 2020-09-05
+
+### Changed
+
+- Add `crontabs`
+
 ## [2.1] - 2020-08-17
 
 ### Changed

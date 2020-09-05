@@ -7,7 +7,7 @@
 ## Dockerfile
 
 ```bash
-VER="32v2.1"
+VER="32v2.1.1"
 docker build -t jhhlab/kevin_fedora:${VER} . --no-cache
 # If failed at some stage
 docker build -t jhhlab/kevin_fedora:${VER}
