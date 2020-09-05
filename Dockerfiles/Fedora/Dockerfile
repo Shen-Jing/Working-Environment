@@ -12,6 +12,7 @@ RUN dnf install -y \
     man man-pages \
     sudo \
     util-linux-user hostname \
+    crontabs \
     vim tmux zsh autojump-zsh \
     less \
     htop glances\
