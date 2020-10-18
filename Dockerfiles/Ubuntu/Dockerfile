@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 # [install] Linux utilities
-RUN apt upate -y && 
+RUN apt update -y && 
     apt install -y \
     man-db \
     sudo \
@@ -27,7 +27,7 @@ RUN apt upate -y &&
 RUN apt install -y \
         make cmake \
         git \
-        gcc g++ g++-10
+        gcc g++ g++-10 \
         clang gdb \
         cppcheck \
         golang \
@@ -39,7 +39,7 @@ RUN apt install -y \
 # [install - optional] Google Drive cli
 
 # After install all tools, update man db and clean dnf cache
-RUN mandb && dnf clean all && rm -rf /var/cache/dnf
+RUN mandb && apt-get autoclean
 
 ENV CUST_USER shenjing
 # [system setting] Add user and set account passwd (user_name:passwd)
