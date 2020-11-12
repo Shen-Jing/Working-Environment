@@ -28,7 +28,8 @@ RUN dnf install -y \
     bzip2 \
     myrepos vcsh \
     ripgrep \
-    fzf
+    fzf \
+    glibc-all-langpacks
 
 # [install] about network security
 RUN dnf install -y \
@@ -77,7 +78,7 @@ RUN mkdir -p /var/run/sshd && \
     ssh-keygen -A && \
     mkdir /home/${CUST_USER}/.ssh
 ADD authorized_keys /home/${CUST_USER}/.ssh/authorized_keys
-RUN chown -R ${CUST_USER}:${CUST_USER} /home/${CUST_USER}/.ssh
+RUN chown -R ${CUST_USER}:${CUST_USER} /home/${CUST_USER}/.ssh && chmod 600 /home/${CUST_USER}/.ssh/authorized_keys
 
 # Set the user name to use when running the image
 # => because sshd need root permission, so default user must be root
