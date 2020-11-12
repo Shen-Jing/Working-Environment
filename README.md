@@ -7,11 +7,12 @@
 ## Dockerfile
 
 ```bash
-VER="32v2.1.1"
-docker build -t jhhlab/kevin_fedora:${VER} . --no-cache
+VER="32v2.1.2"
+docker build -t shenjingnerve/jing_fedora:${VER} . --no-cache
 # If failed at some stage
-docker build -t jhhlab/kevin_fedora:${VER}
-docker push jhhlab/kevin_fedora:${VER}
+docker build -t shenjingnerve/jing_fedora:${VER}
+docker push shenjingnerve/jing_fedora:${VER}
+# docker push jhhlab/kevin_fedora:${VER}
 ```
 
 ### Fedora
@@ -20,7 +21,7 @@ docker push jhhlab/kevin_fedora:${VER}
 
 #### gcc default version (Fedora)
 
-- 32: 10.1.1 (`-std=c++20`)
+- 32: 10.2.1 20201016 (`-std=c++20`)
 - 30: 9.3.1
 - 29: 8.3.1
 - 28: 7.3.0
@@ -57,6 +58,8 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
   - [vaughan/drive-google](https://copr.fedorainfracloud.org/coprs/vaughan/drive-google/)
 - fuzzy finder: `fzf` (and install for [fz](https://github.com/changyuheng/fz/blob/master/README-zh.md))
 - `vcsh` + `myrepos`: for HOME settings
+- `glibc-all-langpacks`
+  - Error: `Falling back to the standard locale (“C”)`
 
 ### Programming Language
 

@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [2.1.2] - 2020-11-12
+
+### Changed
+
+- Fix locale problem (when installing zsh theme)
+- Fix permission of ssh public key (rwx: 600)
+
 ## [2.1.1] - 2020-09-05
 
 ### Changed
