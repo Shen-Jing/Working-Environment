@@ -6,25 +6,24 @@
 # gdb-peda
 
 # [Develope]
+PATH_TO_INSTALL="/usr/local"
 # Boost
-PATH_TO_BOOST="/usr/local"
-BOOST_VER="1.74.0"
-BOOST_DIR="boost_1_74_0"
-cd ${PATH_TO_BOOST}
-#wget -P ${PATH_TO_BOOST} https://dl.bintray.com/boostorg/release/${BOOST_VER}/source/${BOOST_DIR}.tar.bz2
-curl -L -o ${PATH_TO_BOOST}/${BOOST_DIR}.tar.bz2 https://dl.bintray.com/boostorg/release/${BOOST_VER}/source/${BOOST_DIR}.tar.bz2
-tar -jxf ${BOOST_DIR}.tar.bz2 -C ${PATH_TO_BOOST}
-cd ${PATH_TO_BOOST}/${BOOST_DIR}
+BOOST_VER="1.75.0"
+BOOST_DIR="boost_1_75_0"
+cd ${PATH_TO_INSTALL}
+curl -L -o ${PATH_TO_INSTALL}/${BOOST_DIR}.tar.bz2 https://dl.bintray.com/boostorg/release/${BOOST_VER}/source/${BOOST_DIR}.tar.bz2
+tar -jxf ${BOOST_DIR}.tar.bz2 -C ${PATH_TO_INSTALL}
+cd ${PATH_TO_INSTALL}/${BOOST_DIR}
 ./bootstrap.sh
 ./b2 install
-rm -f ${PATH_TO_BOOST}/${BOOST_DIR}.tar.bz2
+rm -f ${PATH_TO_INSTALL}/${BOOST_DIR}.tar.bz2
 
 # Google Test
-git clone https://github.com/google/googletest.git ~/googletest
-cd ~/googletest
+git clone https://github.com/google/googletest.git ${PATH_TO_INSTALL}/googletest
+cd ${PATH_TO_INSTALL}/googletest
 # gtest (O) gmock (X)
 cmake . -DBUILD_GMOCK=OFF -DBUILD_GTEST=ON
 make
 make install
 # /usr/local/include/gtest
-rm -rf ~/googletest
+rm -rf ${PATH_TO_INSTALL}/googletest
