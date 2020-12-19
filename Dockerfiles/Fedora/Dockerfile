@@ -1,4 +1,4 @@
-FROM fedora:32
+FROM fedora:33
 
 # Comment out the tsflags, for (dnf) installing packages with documents
 # and set to auto select fastested repo mirror
@@ -54,6 +54,14 @@ RUN dnf install -y \
 
 RUN dnf debuginfo-install -y glibc libgcc libstdc++
 
+# For building TCmalloc & Google use it :)
+RUN dnf copr enable -y vbatts/bazel && \
+    dnf install -y bazel3
+
+# [install] others (e.g., dependencies)
+RUN dnf install -y \
+    ghostscript
+
 # [install - optional] Google Drive cli
 # vaughan/drive-google doesn't support older version of Fedora (< 31)
 # - [ ] TODO: https://github.com/odeke-em/drive#from-sources
@@ -88,13 +96,16 @@ RUN chown -R ${CUST_USER}:${CUST_USER} /home/${CUST_USER}/.ssh && chmod 600 /hom
 WORKDIR /home/${CUST_USER}
 
 # [install] other tools (need pip3, git clone)
-# Error: Fedora 32 repo doesn't support docker
-#ADD install_docker.sh /install_docker.sh
-#RUN chmod 755 /install_docker.sh && /install_docker.sh
+# Error: Fedora 32 repo doesn't support docker (2020-07)
+ADD install_docker.sh /install_docker.sh
+RUN chmod 755 /install_docker.sh && /install_docker.sh
+
 ADD install_c-c++.sh /install_c-c++.sh
 RUN chmod 755 /install_c-c++.sh && /install_c-c++.sh
+
 ADD install_python.sh /install_python.sh
 RUN chmod 755 /install_python.sh && /install_python.sh
+
 #ADD install_others.sh /install_others.sh
 #RUN chmod 755 /install_others.sh && /install_others.sh
 
