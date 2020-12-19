@@ -28,3 +28,12 @@ cd build
 cmake ..             # Generate native build scripts for GoogleTest.
 make
 make install
+
+# pprof
+go get -u github.com/google/pprof
+
+# TCMalloc
+cd ${PATH_TO_INSTALL}
+git clone https://github.com/google/tcmalloc.git
+cd tcmalloc
+bazel test //tcmalloc/...
