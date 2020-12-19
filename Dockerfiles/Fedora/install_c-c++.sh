@@ -7,6 +7,7 @@
 
 # [Develope]
 PATH_TO_INSTALL="/usr/local"
+
 # Boost
 BOOST_VER="1.75.0"
 BOOST_DIR="boost_1_75_0"
@@ -19,11 +20,11 @@ cd ${PATH_TO_INSTALL}/${BOOST_DIR}
 rm -f ${PATH_TO_INSTALL}/${BOOST_DIR}.tar.bz2
 
 # Google Test
-git clone https://github.com/google/googletest.git ${PATH_TO_INSTALL}/googletest
-cd ${PATH_TO_INSTALL}/googletest
-# gtest (O) gmock (X)
-cmake . -DBUILD_GMOCK=OFF -DBUILD_GTEST=ON
+cd ${PATH_TO_INSTALL}
+git clone https://github.com/google/googletest.git -b release-1.10.0
+cd googletest        # Main directory of the cloned repository.
+mkdir build          # Create a directory to hold the build output.
+cd build
+cmake ..             # Generate native build scripts for GoogleTest.
 make
 make install
-# /usr/local/include/gtest
-rm -rf ${PATH_TO_INSTALL}/googletest
