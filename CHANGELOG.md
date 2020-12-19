@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+## [3.0] - 2020-12-18
+
+### Changed
+
+- **Fedora** update: 32 ➡️ 33
+- C++ boost update: 1.74.0 ➡️ 1.75.0
+- Misc: restoring docker installation
+- Misc: modify installing path of C++ tools
+- New: Google Performance Tools
+  - using golang to install
+- New: TCMalloc
+  - Prerequisite: Bazel (the official build system)
+
 ## [2.1.2] - 2020-11-12
 
 ### Changed

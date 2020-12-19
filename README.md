@@ -7,7 +7,7 @@
 ## Dockerfile
 
 ```bash
-VER="32v2.1.2"
+VER="33v3.0"
 docker build -t shenjingnerve/jing_fedora:${VER} . --no-cache
 # If failed at some stage
 docker build -t shenjingnerve/jing_fedora:${VER}
@@ -21,7 +21,9 @@ docker push shenjingnerve/jing_fedora:${VER}
 
 #### gcc default version (Fedora)
 
-- 32: 10.2.1 20201016 (`-std=c++20`)
+- 33: 10.2.1 20201125 (Red Hat 10.2.1-9)
+  - `-std=c++20`
+- 32: 10.2.1 20201016 (Red Hat 10.2.1-6)
 - 30: 9.3.1
 - 29: 8.3.1
 - 28: 7.3.0
@@ -42,7 +44,7 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
 docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/docker.sock:/var/run/docker.sock -v /home/nfs_home/kevin:/home/kevin -v /mnt/project_warehouse3/godzilla/kevin:/mnt/godzilla/kevin kevin_ubuntu:18.04v1.0
 ```
 
-### linux package
+### Linux package
 
 - `chsh`
   - util-linux-user (Fedora)
@@ -60,6 +62,7 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
 - `vcsh` + `myrepos`: for HOME settings
 - `glibc-all-langpacks`
   - Error: `Falling back to the standard locale (“C”)`
+- `ghostscript`: for `pprof`
 
 ### Programming Language
 
@@ -82,10 +85,16 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
 
 ### install_others (.sh)
 
+- the latest version of Latex
+  - **But** it is an interactive script, **please** manually execute it after running the container.
+
 ### install_c-c++ (.sh)
 
 - boost
 - GTest
+- [gperftools/gperftools](https://github.com/gperftools/gperftools)
+  - `pprof` / `google-perftools`
+- [google/tcmalloc](https://github.com/google/tcmalloc)
 
 ### install_gcc8 (.sh)
 
