@@ -38,9 +38,10 @@ RUN dnf install -y \
 
 # [install] about developer
 RUN dnf install -y \
-    make cmake autoconf\
+    make cmake automake autoconf \
     git \
-    gcc gcc-c++ clang gdb\
+    gcc gcc-c++ clang gdb \
+    gperftools \
     cppcheck \
     java \
     golang \

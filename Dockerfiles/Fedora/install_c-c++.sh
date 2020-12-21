@@ -30,7 +30,14 @@ make
 make install
 
 # pprof
-go get -u github.com/google/pprof
+cd ${PATH_TO_INSTALL}
+git clone --recursive https://github.com/gperftools/gperftools.git
+cd gperftools
+./autogen.sh
+./configure
+make
+make check  # optional step, google profiler's self-test
+make install
 
 # TCMalloc
 cd ${PATH_TO_INSTALL}
