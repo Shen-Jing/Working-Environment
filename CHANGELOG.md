@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [3.0.1] - 2020-12-21
+
+### Changed
+
+- Fix: modify pprof installation
+  - use older pprof instead of pprof of golang
+  - dependency: `aclocal` (automake)
+
 ## [3.0] - 2020-12-18
 
 ### Changed

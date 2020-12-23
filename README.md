@@ -7,7 +7,7 @@
 ## Dockerfile
 
 ```bash
-VER="33v3.0"
+VER="33v3.0.1"
 docker build -t shenjingnerve/jing_fedora:${VER} . --no-cache
 # If failed at some stage
 docker build -t shenjingnerve/jing_fedora:${VER}
@@ -72,6 +72,7 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
 - gdb, cgdb
 - clang: for ale linter (include clang++)
 - cppcheck: static analysis tool for C/C++ code
+- automake: `aclocal` for googleperftools
 - pylint
 - java: Canu
 
@@ -91,10 +92,13 @@ docker run -itd --privileged --name kevin -p 56137:22 -p 56138:8888 -v /var/run/
 ### install_c-c++ (.sh)
 
 - boost
-- GTest
+- [google/googletest](https://github.com/google/googletest)
+  - Follow: [Generic Build Instructions](https://github.com/google/googletest/tree/master/googletest#standalone-cmake-project)
 - [gperftools/gperftools](https://github.com/gperftools/gperftools)
   - `pprof` / `google-perftools`
 - [google/tcmalloc](https://github.com/google/tcmalloc)
+  - Follow: [TCMalloc Quickstart](https://github.com/google/tcmalloc/blob/master/docs/quickstart.md#getting-the-tcmalloc-code)
+  - Bazel: [Installing Bazel on Fedora and CentOS](https://docs.bazel.build/versions/master/install-redhat.html)
 
 ### install_gcc8 (.sh)
 
