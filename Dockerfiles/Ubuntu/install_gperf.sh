@@ -6,8 +6,8 @@ sudo apt install automake autoconf libtool
 cd /usr/local/
 git clone --recursive https://github.com/gperftools/gperftools.git
 cd gperftools
-./autogen.sh
-./configure
-make
-make check  # optional step, google profiler's self-test
-make install
+sudo ./autogen.sh
+sudo ./configure
+sudo make
+sudo make check  # optional step, google profiler's self-test
+sudo make install
